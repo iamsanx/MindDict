@@ -1,0 +1,215 @@
+Metadata-Version: 2.4
+Name: minddict
+Version: 0.2.0
+Summary: A smarter Python dictionary with filtering, mapping, merging, and JSON utilities.
+Author-email: iamsanx <iamsan.pro@proton.me>
+License: MIT
+Project-URL: Homepage, https://github.com/iamsanx/minddict
+Project-URL: Issues, https://github.com/iamsanx/minddict/issues
+Keywords: dict,utility,json,data,minddict
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+
+# 🧠 MindDict  
+*A smarter Python dictionary with filtering, mapping, merging, and JSON utilities.*
+
+[![PyPI](https://img.shields.io/pypi/v/minddict.svg)](https://pypi.org/project/minddict/)
+[![Python](https://img.shields.io/pypi/pyversions/minddict.svg)](https://pypi.org/project/minddict/)
+[![License](https://img.shields.io/pypi/l/minddict.svg)](LICENSE)
+[![Tests](https://img.shields.io/badge/tests-passed-brightgreen.svg)](https://pypi.org/project/minddict/)
+
+---
+
+## ✨ Overview
+
+**MindDict** is a lightweight Python package that extends the built-in `dict` with practical utilities for data manipulation.  
+It makes your dictionaries more expressive, readable, and fun to use — all without dependencies.
+
+💡 Ideal for:
+- data manipulation and transformation
+- JSON serialization/deserialization
+- configuration management
+- clean, functional-style programming
+
+---
+
+## 🚀 Installation
+
+```bash
+pip install minddict
+````
+
+or from TestPyPI (for development builds):
+
+```bash
+pip install -i https://test.pypi.org/simple/ minddict
+```
+
+---
+
+## 🧩 Quick Start
+
+```python
+from minddict import MindDict
+
+data = MindDict(a=1, b=2, c=3)
+
+# 🔍 Filter values
+filtered = data.filter(lambda k, v: v > 1)
+print(filtered)
+# → MindDict(b=2, c=3)
+
+# 🔄 Transform keys and values
+mapped = data.map(lambda k, v: (k.upper(), v * 10))
+print(mapped)
+# → MindDict(A=10, B=20, C=30)
+
+# 💾 Serialize to JSON
+print(data.to_json(indent=2))
+# {
+#   "a": 1,
+#   "b": 2,
+#   "c": 3
+# }
+
+# 🧠 Invert keys and values
+print(data.invert())
+# → MindDict({1: 'a', 2: 'b', 3: 'c'})
+```
+
+---
+
+## ⚙️ Features
+
+| Method                       | Description                                                                |
+| ---------------------------- | -------------------------------------------------------------------------- |
+| `.filter(fn)`                | Keep items where `fn(key, value)` is `True`.                               |
+| `.map(fn)`                   | Transform each key/value pair via `fn(key, value) → (new_key, new_value)`. |
+| `.invert()`                  | Swap keys and values (last wins on conflicts).                             |
+| `.diff(other, strict=False)` | Compare two dicts and get differences.                                     |
+| `.merge(other)`              | Combine two dicts without mutating the originals.                          |
+| `.flatten(separator=".")`    | Convert nested dicts into flat key paths.                                  |
+| `.unflatten(separator=".")`  | Rebuild nested structure from flattened keys.                              |
+| `.to_json(indent=0)`         | Serialize into JSON string.                                                |
+| `.from_json(string)`         | Load from a JSON string.                                                   |
+
+---
+
+## 🧪 Examples
+
+### 🔹 Filtering
+
+```python
+data = MindDict(name="Alice", age=25, city="Paris")
+adults = data.filter(lambda k, v: k == "age" and v >= 18)
+print(adults)
+# MindDict(age=25)
+```
+
+### 🔹 Mapping
+
+```python
+data = MindDict(x=1, y=2)
+result = data.map(lambda k, v: (k.upper(), v ** 2))
+# MindDict(X=1, Y=4)
+```
+
+### 🔹 Flatten & Unflatten
+
+```python
+nested = MindDict({
+    "user": {"name": "Bob", "info": {"city": "Paris", "age": 30}},
+    "active": True
+})
+
+flat = nested.flatten()
+# MindDict({'user.name': 'Bob', 'user.info.city': 'Paris', 'user.info.age': 30, 'active': True})
+
+rebuilt = flat.unflatten()
+# MindDict({'user': {'name': 'Bob', 'info': {'city': 'Paris', 'age': 30}}, 'active': True})
+```
+
+### 🔹 Diff & Merge
+
+```python
+a = MindDict(a=1, b=2)
+b = MindDict(b=3, c=4)
+
+print(a.diff(b))
+# MindDict({'b': (2, 3), 'c': (None, 4)})
+
+print(a.merge(b))
+# MindDict({'a': 1, 'b': 3, 'c': 4})
+```
+
+---
+
+## 🧱 Project Structure
+
+```
+minddict/
+├── minddict/
+│   ├── __init__.py
+│   └── core.py
+├── tests/
+│   └── test_core.py
+├── README.md
+├── LICENSE
+└── pyproject.toml
+```
+
+---
+
+## 🧩 Design Principles
+
+* Pure functional methods — never mutate the original instance
+* Always return a new `MindDict`
+* Clean, explicit, Pythonic code
+* Zero dependencies (only standard library)
+
+---
+
+## 🧰 Development
+
+### Run tests
+
+```bash
+pytest -v
+```
+
+### Build package
+
+```bash
+python -m build
+```
+
+### Upload to TestPyPI
+
+```bash
+python -m twine upload --repository testpypi dist/*
+```
+
+---
+
+## 📜 License
+
+**MIT License**
+Copyright © 2025
+
+---
+
+## 👥 Author
+
+Maintained with ❤️ by iamsan.
+Contributions, issues, and feature requests are welcome on
+👉 [GitHub Issues](https://github.com/iamsanx/MindDict/issues)
+
+---
+
+## 🌟 Support
+
+If you find MindDict useful, star ⭐ the repository on GitHub and share it!
+Every star helps keep the project alive 🚀

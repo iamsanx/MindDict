@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "minddict"
+version = "0.2.0"
+description = "A smarter Python dictionary with filtering, mapping, merging, and JSON utilities."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [
+  { name = "iamsanx", email = "iamsan.pro@proton.me" }
+]
+keywords = ["dict", "utility", "json", "data", "minddict"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent"
+]
+
+dependencies = []
+
+[project.urls]
+"Homepage" = "https://github.com/iamsanx/minddict"
+"Issues" = "https://github.com/iamsanx/minddict/issues"

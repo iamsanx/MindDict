@@ -1,0 +1,9 @@
+README.md
+pyproject.toml
+minddict/__init__.py
+minddict/core.py
+minddict.egg-info/PKG-INFO
+minddict.egg-info/SOURCES.txt
+minddict.egg-info/dependency_links.txt
+minddict.egg-info/top_level.txt
+tests/test_core.py
